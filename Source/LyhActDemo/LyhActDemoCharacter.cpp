@@ -96,7 +96,7 @@ void ALyhActDemoCharacter::BeginPlay()
 	MaxMagic = PlayerStates.Magic;
 	if (MaxMagic != 0)
 	{
-	GetWorldTimerManager().SetTimer(RegainHandle, this, &ALyhActDemoCharacter::RegainMagic, 1);
+		GetWorldTimerManager().SetTimer(RegainHandle, this, &ALyhActDemoCharacter::RegainMagic, 1, true);
 	}
 }
 
@@ -229,7 +229,7 @@ void ALyhActDemoCharacter::AttackEnemy()
 
 void ALyhActDemoCharacter::Dodge()
 {
-	if (bIsDefencing || GetMovementComponent()->IsFalling() || bIsDodging || PlayerStates.Magic < 20)
+	if (bIsDefencing || GetMovementComponent()->IsFalling() || bIsDodging || PlayerStates.Magic < 10)
 	{
 		return;
 	}
@@ -385,7 +385,7 @@ void ALyhActDemoCharacter::OnDodgeComplete()
 
 void ALyhActDemoCharacter::Defence_Begin()
 {
-	if (bIsAttacking || GetMovementComponent()->IsFalling() || bIsDodging || bIsDefencing || bIsAttacked || PlayerStates.Magic < 10)
+	if (bIsAttacking || GetMovementComponent()->IsFalling() || bIsDodging || bIsDefencing || bIsAttacked || PlayerStates.Magic < 5)
 	{
 		return;
 	}
@@ -427,7 +427,7 @@ void ALyhActDemoCharacter::RegainMagic()
 {
 	if (PlayerStates.Magic < MaxMagic)
 	{
-	PlayerStates.Magic += PlayerStates.MagicRegain;
+		PlayerStates.Magic += PlayerStates.MagicRegain;
 	}
 }
 
